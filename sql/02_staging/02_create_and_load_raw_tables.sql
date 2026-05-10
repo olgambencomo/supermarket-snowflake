@@ -1,14 +1,14 @@
--- ============================================================
+
 -- 02_staging / 02_create_and_load_raw_tables.sql
 -- Create raw tables and load data from internal stage
--- ============================================================
+-- Run after uploading the 4 CSV files to SUPERMARKET_STAGE
+
 
 USE DATABASE SUPERMARKET_DB;
 USE SCHEMA RAW;
 USE WAREHOUSE SUPERMARKET_WH;
 
--- ── RAW_PRODUCTS (annex1.csv) ─────────────────────────────
--- Product catalog: item codes, names, and category hierarchy
+-- Product catalog
 CREATE OR REPLACE TABLE RAW_PRODUCTS (
     item_code      NUMBER,
     item_name      VARCHAR(200),
@@ -17,15 +17,13 @@ CREATE OR REPLACE TABLE RAW_PRODUCTS (
 );
 
 COPY INTO RAW_PRODUCTS
-FROM @SUPERMARKET_STAGE/annex1.csv
-FILE_FORMAT = CSV_FORMAT
-ON_ERROR = 'ABORT_STATEMENT';
+FROM @SUPERMARKET_DB.RAW.SUPERMARKET_STAGE/annex1.csv
+FILE_FORMAT = SUPERMARKET_DB.RAW.CSV_FORMAT;
 
 
--- ── RAW_SALES (annex2.csv) ────────────────────────────────
--- Transaction log: 878K+ rows of daily sales activity
+-- Sales transactions
 CREATE OR REPLACE TABLE RAW_SALES (
-    sale_date           VARCHAR(10),   -- kept as string; cast in transform layer
+    sale_date           VARCHAR(10),
     sale_time           VARCHAR(30),
     item_code           NUMBER,
     quantity_sold_kg    FLOAT,
@@ -35,13 +33,11 @@ CREATE OR REPLACE TABLE RAW_SALES (
 );
 
 COPY INTO RAW_SALES
-FROM @SUPERMARKET_STAGE/annex2.csv
-FILE_FORMAT = CSV_FORMAT
-ON_ERROR = 'ABORT_STATEMENT';
+FROM @SUPERMARKET_DB.RAW.SUPERMARKET_STAGE/annex2.csv
+FILE_FORMAT = SUPERMARKET_DB.RAW.CSV_FORMAT;
 
 
--- ── RAW_WHOLESALE_PRICES (annex3.csv) ─────────────────────
--- Daily wholesale (cost) prices per item
+-- Daily wholesale prices
 CREATE OR REPLACE TABLE RAW_WHOLESALE_PRICES (
     price_date              VARCHAR(10),
     item_code               NUMBER,
@@ -49,13 +45,11 @@ CREATE OR REPLACE TABLE RAW_WHOLESALE_PRICES (
 );
 
 COPY INTO RAW_WHOLESALE_PRICES
-FROM @SUPERMARKET_STAGE/annex3.csv
-FILE_FORMAT = CSV_FORMAT
-ON_ERROR = 'ABORT_STATEMENT';
+FROM @SUPERMARKET_DB.RAW.SUPERMARKET_STAGE/annex3.csv
+FILE_FORMAT = SUPERMARKET_DB.RAW.CSV_FORMAT;
 
 
--- ── RAW_LOSS_RATES (annex4.csv) ───────────────────────────
--- Expected shrinkage/loss percentage per product
+-- Product loss/shrinkage rates
 CREATE OR REPLACE TABLE RAW_LOSS_RATES (
     item_code       NUMBER,
     item_name       VARCHAR(200),
@@ -63,19 +57,19 @@ CREATE OR REPLACE TABLE RAW_LOSS_RATES (
 );
 
 COPY INTO RAW_LOSS_RATES
-FROM @SUPERMARKET_STAGE/annex4.csv
-FILE_FORMAT = CSV_FORMAT
-ON_ERROR = 'ABORT_STATEMENT';
+FROM @SUPERMARKET_DB.RAW.SUPERMARKET_STAGE/annex4.csv
+FILE_FORMAT = SUPERMARKET_DB.RAW.CSV_FORMAT;
 
 
--- ── Validation Queries ────────────────────────────────────
-SELECT 'RAW_PRODUCTS'        AS tbl, COUNT(*) AS rows FROM RAW_PRODUCTS         UNION ALL
-SELECT 'RAW_SALES'           AS tbl, COUNT(*) AS rows FROM RAW_SALES             UNION ALL
-SELECT 'RAW_WHOLESALE_PRICES'AS tbl, COUNT(*) AS rows FROM RAW_WHOLESALE_PRICES  UNION ALL
-SELECT 'RAW_LOSS_RATES'      AS tbl, COUNT(*) AS rows FROM RAW_LOSS_RATES;
+-- Validation
+SELECT 'RAW_PRODUCTS'         AS table_name, COUNT(*) AS rows FROM RAW_PRODUCTS         UNION ALL
+SELECT 'RAW_SALES'            AS table_name, COUNT(*) AS rows FROM RAW_SALES             UNION ALL
+SELECT 'RAW_WHOLESALE_PRICES' AS table_name, COUNT(*) AS rows FROM RAW_WHOLESALE_PRICES  UNION ALL
+SELECT 'RAW_LOSS_RATES'       AS table_name, COUNT(*) AS rows FROM RAW_LOSS_RATES;
 
--- Expected:
--- RAW_PRODUCTS          251
--- RAW_SALES         878,503
--- RAW_WHOLESALE     55,982
--- RAW_LOSS_RATES        251
+-- Expected results:
+-- RAW_PRODUCTS            251
+-- RAW_SALES           878,503
+-- RAW_WHOLESALE_PRICES 55,982
+-- RAW_LOSS_RATES          251
+
