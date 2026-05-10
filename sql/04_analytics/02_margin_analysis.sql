@@ -1,7 +1,7 @@
--- ============================================================
+
 -- 04_analytics / 02_margin_analysis.sql
 -- Gross margin analysis by category and time
--- ============================================================
+
 
 USE DATABASE SUPERMARKET_DB;
 USE SCHEMA REPORTING;
