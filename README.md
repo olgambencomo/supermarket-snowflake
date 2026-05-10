@@ -50,7 +50,7 @@ REPORTING LAYER (Views)
     VW_ABC_CLASSIFICATION
          ↓
 PYTHON LAYER (Notebook)
-    Visualizations · Forecasting · Clustering
+    Visualizations · Clustering
 ```
 
 ---
