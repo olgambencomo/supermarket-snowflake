@@ -1,7 +1,7 @@
--- ============================================================
+
 -- 02_staging / 01_create_stage_and_file_formats.sql
 -- Creates the CSV file format and internal stage
--- ============================================================
+
 
 USE DATABASE SUPERMARKET_DB;
 USE SCHEMA RAW;
