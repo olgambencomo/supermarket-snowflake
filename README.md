@@ -58,7 +58,7 @@ PYTHON LAYER (Notebook)
 ## 📁 Project Structure
 
 ```
-supermarket_snowflake/
+supermarket-snowflake/
 ├── README.md
 ├── .gitignore
 ├── sql/
