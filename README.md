@@ -1,4 +1,4 @@
-# 🥦 Supermarket Sales Analytics — Snowflake SQL + Python
+# Supermarket Sales Analytics — Snowflake SQL + Python
 
 > End-to-end analytics project built on Snowflake, analyzing 3 years of fresh produce sales from a Chinese supermarket chain (Jul 2020 – Jun 2023).
 
@@ -9,7 +9,7 @@
 
 ---
 
-## 📌 Project Overview
+## Project Overview
 
 This project demonstrates a full analytics lifecycle — from raw data ingestion and warehouse design in Snowflake to advanced SQL analytics and Python visualizations — using real supermarket transaction data.
 
