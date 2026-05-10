@@ -28,7 +28,7 @@ This project demonstrates a full analytics lifecycle — from raw data ingestion
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 RAW LAYER
@@ -176,7 +176,7 @@ K-Means clustering (k=4) reveals four distinct product profiles:
 
 ---
 
-## 💡 Key Findings
+## Key Findings
 
 - **878,042 transactions** over 3 fiscal years (Jul 2020 – Jun 2023)
 - **Flower/Leaf Vegetables** leads in revenue driven by volume; **Edible Mushroom** leads in price per kg
@@ -189,12 +189,12 @@ K-Means clustering (k=4) reveals four distinct product profiles:
 
 ---
 
-## 📝 Data Dictionary
+## 📝Data Dictionary
 
 See [`docs/data_dictionary.md`](docs/data_dictionary.md) for full column descriptions.
 
 ---
 
-## 🙏 Credits
+##  Credits
 
 Dataset by [yapwh1208 on Kaggle](https://www.kaggle.com/datasets/yapwh1208/supermarket-sales-data).
