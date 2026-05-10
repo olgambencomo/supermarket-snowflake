@@ -186,15 +186,6 @@ K-Means clustering (k=4) reveals four distinct product profiles:
 - Only **28 products (11% of catalog)** generate 69% of total revenue (Pareto principle)
 - **Niche products** priced above ¥40/kg have near-zero volume — candidates for removal
 
----
-
-## 💡 Skills Demonstrated
-
-- **Snowflake**: Virtual Warehouses, Internal Stages, COPY INTO, Star Schema design
-- **Advanced SQL**: CTEs, Window Functions, LAG, OVER(), DATE_TRUNC, QUALIFY
-- **Analytics Engineering**: layered transformation (RAW → ANALYTICS → REPORTING)
-- **Python**: pandas, matplotlib, seaborn, Prophet (forecasting), scikit-learn (K-Means clustering)
-- **Data Science**: demand forecasting, product clustering, ABC/Pareto analysis
 
 ---
 
